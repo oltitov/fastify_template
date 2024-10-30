@@ -1,18 +1,24 @@
 {
   "get": {
+    "tags": ["api"],
+    "summary": "WebSocket connection",
+    "description": "Establishes a WebSocket connection to a specific room",
     "params": {
       "type": "object",
       "required": ["room"],
       "properties": {
         "room": {
-          "type": "string"
+          "type": "string",
+          "description": "Room identifier"
         }
       }
     },
     "response": {
-      "200": {
-        "type": "object",
-        "description": "Successful"
+      "400": {
+        "description": "Bad Request"
+      },
+      "default": {
+        "description": "Successful WebSocket upgrade"
       }
     }
   }
