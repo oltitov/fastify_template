@@ -1,0 +1,19 @@
+{
+  "get": {
+    "params": {
+      "type": "object",
+      "required": ["room"],
+      "properties": {
+        "room": {
+          "type": "string"
+        }
+      }
+    },
+    "response": {
+      "200": {
+        "type": "object",
+        "description": "Successful"
+      }
+    }
+  }
+}
