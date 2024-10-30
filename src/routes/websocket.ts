@@ -1,14 +1,14 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import { WebSocket, RawData } from 'ws';
-import type { ParamsSchema } from '../types/websocket';
-import websocketRoomSchema from '@schemas/websocket.json';
+import type { ParamsSchema } from '@type/websocket';
+import { get } from '@schemas/websocket.json';
 
 export default (fastify: FastifyInstance) => {
   fastify.get<ParamsSchema>(
     '/websocket/:room',
     {
       websocket: true,
-      schema: websocketRoomSchema.get,
+      schema: get,
       preValidation: [fastify.websocketRooms]
     },
     async (connection: WebSocket, req: FastifyRequest<ParamsSchema>) => {
@@ -29,7 +29,7 @@ export default (fastify: FastifyInstance) => {
           connection.send('pong');
         }
 
-        req.RoomConnections![roomKey].forEach((client: WebSocket) => {
+        req.RoomConnections[roomKey].forEach((client: WebSocket) => {
           if (client.readyState === WebSocket.OPEN) {
             client.send(`Message to /websocket/${roomKey} clients: ${message}`);
           }
@@ -37,7 +37,7 @@ export default (fastify: FastifyInstance) => {
       });
 
       connection.on('close', () => {
-        req.RoomConnections![roomKey].delete(connection);
+        req.RoomConnections[roomKey].delete(connection);
 
         if (req.RoomConnections![roomKey].size === 0) {
           delete req.RoomConnections![roomKey];

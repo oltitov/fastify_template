@@ -3,8 +3,10 @@ import websocket from '@fastify/websocket';
 import { FastifyInstance, FastifyPluginCallback, FastifyRequest } from 'fastify';
 
 const init: FastifyPluginCallback = (fastify: FastifyInstance) => {
+  const RoomConnections = {};
+
   fastify.decorate('websocketRooms', async (req: FastifyRequest) => {
-    req.RoomConnections = {};
+    req.RoomConnections = RoomConnections;
   });
 
   fastify.register(websocket, {

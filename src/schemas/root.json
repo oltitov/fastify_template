@@ -1,4 +1,6 @@
 {
+  "tags": ["api"],
+  "summary": "Small test ping",
   "response": {
     "200": {
       "type": "object",

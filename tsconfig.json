@@ -18,7 +18,7 @@
       "@plugins/*": ["plugins/*"],
       "@routes/*": ["routes/*"],
       "@schemas/*": ["schemas/*"],
-      "@types/*": ["types/*"]
+      "@type/*": ["type/*"]
     }
   },
   "exclude": ["node_modules"],
